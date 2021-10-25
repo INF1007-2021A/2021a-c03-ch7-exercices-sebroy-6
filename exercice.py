@@ -32,19 +32,44 @@ def draw_branche(pen_size, length, angle):  # It goes directly to the deepest no
     # and second (left) draw_branche(), it goes backwards once and does the second (left) draw_brach() (does this for every node
     # in the tree
     if length > 0 and pen_size > 0:
-        if length == 10 or pen_size == 1:
-            color("GREEN")
         pensize(pen_size)
         forward(length)
         right(angle)
         draw_branche(pen_size - 1, length - 10, angle - 5)  # Lignes 36 a 40 : Je n'arrive pas à visualiser le processus
         left(angle * 2)
         draw_branche(pen_size - 1, length - 10, angle - 5)
-        if length > 20 and pen_size > 2:
-            color("BROWN")
         right(angle)
         backward(length)
 
+
+def valide(chaine: str) -> bool:
+    for i in range(len(chaine)):
+        if chaine[i] not in ["a", "t", "g", "c"]:
+            return False
+    return True
+
+def saisie(chaine):
+    while not valide(chaine):
+        print("votre saisie n'est pas valide")
+        print("Veuillez saisir une saisie valide:")
+        chaine = input()
+
+    return str(chaine)
+
+def proportion():
+    print("chaine D'ADN :")
+    chaine = saisie(input())
+
+    print("séquence D'ADN :")
+    sequence = saisie(input())
+
+    fois_dans_la_chaine = 0
+
+    for i in range(len(chaine)-1):
+        if sequence == str(chaine[i] + chaine[i + 1]):
+            fois_dans_la_chaine += 1
+
+    return (fois_dans_la_chaine / len(chaine)) * 100, sequence
 
 
 
@@ -59,4 +84,9 @@ if __name__ == '__main__':
 
     print("Exercice #2:", most_frequent_letter("hello world"))  # Exercice 2
 
-    draw_tree(6, 10, 30)  # Exercice 3
+    #draw_tree(6, 10, 30)  # Exercice 3
+
+    rapport, chaine = proportion()
+    print("Exercice #4 :", "Il y a {}% de \"{}\"".format(round(rapport, 2), chaine))
+
+
