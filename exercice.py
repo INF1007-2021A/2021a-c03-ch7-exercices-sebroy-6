@@ -87,7 +87,7 @@ if __name__ == '__main__':
 
     print("Exercice #2:", most_frequent_letter(input("Veuillez écrire la phrase de laquel nous allons trouver la lettre la plus fréquence: ")))  # Exercice 2
 
-    #draw_tree(6, 10, 30)  # Exercice 3
+    draw_tree(6, 10, 30)  # Exercice 3
 
     rapport, chaine = proportion()
     print("Exercice #4 :", "Il y a {}% de \"{}\"".format(round(rapport, 2), chaine))
