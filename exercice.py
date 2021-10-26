@@ -10,10 +10,9 @@ from turtle import *
 
 # TODO: Définissez vos fonction ici
 
-def volume_masse_ellipsoide(a=1, b=1, c=1, masse_volumique=1):
-    V = (4 / 3)*math.pi * a * b * c
-    masse = masse_volumique * V
-    return V, masse
+def volume_masse_ellipsoide(axis_a=1, axis_b=1, axis_c=1, densite=1):
+    V = (4 / 3) * math.pi * axis_a * axis_b * axis_c
+    return V, densite * V  # volume, masse
 
 
 def draw_tree(pen_size=6, length=8, angle=30):  # Revoir avec le prof pour savoir comment simplifier la construction du code #3
@@ -28,6 +27,7 @@ def draw_tree(pen_size=6, length=8, angle=30):  # Revoir avec le prof pour savoi
     draw_branche(pen_size, length, angle)
     done()
 
+
 def draw_branche(pen_size, length, angle):  # It goes directly to the deepest node and, when the first (rigth)
     # and second (left) draw_branche(), it goes backwards once and does the second (left) draw_brach() (does this for every node
     # in the tree
@@ -35,7 +35,7 @@ def draw_branche(pen_size, length, angle):  # It goes directly to the deepest no
         pensize(pen_size)
         forward(length)
         right(angle)
-        draw_branche(pen_size - 1, length - 10, angle - 5)  # Lignes 36 a 40 : Je n'arrive pas à visualiser le processus
+        draw_branche(pen_size - 1, length - 10, angle - 5)
         left(angle * 2)
         draw_branche(pen_size - 1, length - 10, angle - 5)
         right(angle)
@@ -48,20 +48,24 @@ def valide(chaine: str) -> bool:
             return False
     return True
 
-def saisie(chaine):
+
+def saisie(chaine : str) -> str:
     while not valide(chaine):
         print("votre saisie n'est pas valide")
-        print("Veuillez saisir une saisie valide:")
-        chaine = input()
+        chaine = input("Veuillez saisir une saisie valide:")
 
-    return str(chaine)
+    return chaine
 
 def proportion():
+
     print("chaine D'ADN :")
     chaine = saisie(input())
 
     print("séquence D'ADN :")
     sequence = saisie(input())
+
+    if chaine == sequence:
+        return 100.0, sequence
 
     fois_dans_la_chaine = 0
 
@@ -72,7 +76,6 @@ def proportion():
     return (fois_dans_la_chaine / len(chaine)) * 100, sequence
 
 
-
 if __name__ == '__main__':
     # TODO: Appelez vos fonctions ici
 
@@ -80,9 +83,9 @@ if __name__ == '__main__':
 
 
     most_frequent_letter = lambda texte: list(frequence(texte))[list(frequence(texte).values())
-        .index(max(list(frequence(texte).values())))]
+        .index(max(list(frequence(texte).values())))]  # Exercice 2
 
-    print("Exercice #2:", most_frequent_letter("hello world"))  # Exercice 2
+    print("Exercice #2:", most_frequent_letter(input("Veuillez écrire la phrase de laquel nous allons trouver la lettre la plus fréquence: ")))  # Exercice 2
 
     #draw_tree(6, 10, 30)  # Exercice 3
 
